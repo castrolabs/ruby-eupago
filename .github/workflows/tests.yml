@@ -25,4 +25,4 @@ jobs:
       - name: Lint with RuboCop
         run: rubocop
       - name: Testing
-        run: rake test
+        run: bundle exec rspec
