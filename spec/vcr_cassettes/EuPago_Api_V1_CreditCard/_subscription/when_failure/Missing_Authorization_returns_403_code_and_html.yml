@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.eupago.pt/api/creditcard/subscription
+    body:
+      encoding: UTF-8
+      string: amount=1000&currency=EUR
+    headers:
+      Authorization:
+      - ''
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - nginx/1.20.1
+      Date:
+      - Wed, 10 Sep 2025 22:10:37 GMT
+      Content-Type:
+      - text/html
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: "<html>\r\n<head><title>403 Forbidden</title></head>\r\n<body>\r\n<center><h1>403
+        Forbidden</h1></center>\r\n<hr><center>nginx/1.20.1</center>\r\n</body>\r\n</html>\r\n"
+  recorded_at: Wed, 10 Sep 2025 22:10:37 GMT
+recorded_with: VCR 6.3.1

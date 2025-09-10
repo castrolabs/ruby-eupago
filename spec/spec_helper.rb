@@ -1,4 +1,5 @@
-require_relative "../lib/eupago_ruby"
+require_relative "../lib/ruby_eupago"
+require_relative "support/vcr_setup"
 
 RSpec.configure do |config|
   config.expect_with(:rspec) do |expectations|
