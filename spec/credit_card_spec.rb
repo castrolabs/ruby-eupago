@@ -7,7 +7,7 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
 
   describe "#subscription" do
     context "when failure" do
-      it "Missing Authorization returns 403 code and html", :vcr, :focus do
+      it "Missing Authorization returns 403 code and html", :vcr do
         expect do
           client.subscription(params)
         end.to(raise_error(EuPago::EuPagoForbiddenError, /\[Eupago SDK] Forbidden/))
