@@ -44,13 +44,12 @@ module EuPago::Api
     end
 
     def self.parse_result(result)
-
-      if result.headers['content-type'] == 'application/json'
+      if result.headers["content-type"] == "application/json"
         response = result.parsed_response
       else
         response = result.body
       end
-        
+
       case result.code
       when 200
         result.parsed_response

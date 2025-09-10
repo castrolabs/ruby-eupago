@@ -16,3 +16,9 @@ Metrics/MethodLength:
 
 Style/ClassMethodsDefinitions:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
