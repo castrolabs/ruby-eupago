@@ -1,4 +1,6 @@
-module Api
+require "httparty"
+
+module EuPago::Api
   class Client
     def self.get(api_url, query: {})
       result = HTTParty.get(
@@ -26,7 +28,7 @@ module Api
           "Content-Type" => "application/json",
           "Accept" => "application/json",
         },
-        body: body.to_json,
+        body: body,
       )
 
       parse_result(result)
@@ -42,17 +44,26 @@ module Api
     end
 
     def self.parse_result(result)
+
+      if result.headers['content-type'] == 'application/json'
+        response = result.parsed_response
+      else
+        response = result.body
+      end
+        
       case result.code
       when 200
         result.parsed_response
       when 401
-        raise EuPagoUnauthorizedError, "[Eupago SDK] Unauthorized: #{result.parsed_response}"
+        raise EuPagoUnauthorizedError, "[Eupago SDK] Unauthorized: #{response}"
       when 400
-        raise EuPagoBadRequestError, "[Eupago SDK] Bad Request: #{result.parsed_response}"
+        raise EuPagoBadRequestError, "[Eupago SDK] Bad Request: #{response}"
       when 404
-        raise EuPagoNotFoundError, "[Eupago SDK] Not Found: #{result.parsed_response}"
+        raise EuPagoNotFoundError, "[Eupago SDK] Not Found: #{response}"
+      when 403
+        raise EuPagoForbiddenError, "[Eupago SDK] Forbidden: #{response}"
       else
-        raise EuPagoClientError, "[Eupago SDK] Error (#{result.code}): #{result.parsed_response}"
+        raise EuPagoClientError, "[Eupago SDK] Error (#{result.code}): #{response}"
       end
     end
   end
@@ -61,4 +72,5 @@ module Api
   class EuPagoUnauthorizedError < StandardError; end
   class EuPagoBadRequestError < StandardError; end
   class EuPagoNotFoundError < StandardError; end
+  class EuPagoForbiddenError < StandardError; end
 end

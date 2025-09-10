@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    env_file: 
+      - ../.env.development
     volumes:
       - ..:/workspace:cached
     # Overrides default command so things don't shut down after the process ends.
