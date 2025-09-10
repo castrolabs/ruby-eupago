@@ -1,0 +1,28 @@
+name: build
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.9'
+      - name: Build
+        run: |
+          gem install bundler
+          bundle install --retry 3
+      - name: Lint with RuboCop
+        run: rubocop
+      - name: Testing
+        run: rake test

@@ -1,0 +1,18 @@
+{
+  "name": "EuPago Lib",
+  "dockerComposeFile": "./docker-compose.devcontainer.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "remoteEnv": {
+    "GIT_EDITOR": "code --wait"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.github-vscode-theme"
+      ]
+    }
+  },
+  "initializeCommand": "ls",
+  "postAttachCommand": "bundle config set --local path 'vendor/bundle' && bundle install"
+}

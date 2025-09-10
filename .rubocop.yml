@@ -1,0 +1,18 @@
+inherit_gem:
+  rubocop-shopify: rubocop.yml
+
+AllCops:
+  Include:
+    - Rakefile
+    - Gemfile
+    - 'lib/**/*.rb'
+  Exclude:
+    - eupago_ruby.gemspec
+    - vendor/**/*
+    - Rakefile.rb
+
+Metrics/MethodLength:
+  Enabled: false
+
+Style/ClassMethodsDefinitions:
+  Enabled: false
