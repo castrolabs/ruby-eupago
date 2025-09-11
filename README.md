@@ -9,7 +9,7 @@ WIP
 ## Testing
 
 ```bash
-bundle exec rake
+bundle exec rspec
 ```
 
 ## Contributing
