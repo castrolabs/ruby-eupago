@@ -61,23 +61,23 @@ module EuPago
         when 200
           result.parsed_response
         when 401
-          raise EuPago::EuPagoUnauthorizedError, "[Eupago SDK] Unauthorized: #{response}"
+          raise EuPago::UnauthorizedError, "[Eupago SDK] Unauthorized: #{response}"
         when 400
-          raise EuPago::EuPagoBadRequestError, "[Eupago SDK] Bad Request: #{response}"
+          raise EuPago::BadRequestError, "[Eupago SDK] Bad Request: #{response}"
         when 404
-          raise EuPago::EuPagoNotFoundError, "[Eupago SDK] Not Found: #{response}"
+          raise EuPago::NotFoundError, "[Eupago SDK] Not Found: #{response}"
         when 403
-          raise EuPago::EuPagoForbiddenError, "[Eupago SDK] Forbidden: #{response}"
+          raise EuPago::ForbiddenError, "[Eupago SDK] Forbidden: #{response}"
         else
-          raise EuPago::EuPagoClientError, "[Eupago SDK] Error (#{result.code}): #{response}"
+          raise EuPago::ClientError, "[Eupago SDK] Error (#{result.code}): #{response}"
         end
       end
     end
   end
 
-  class EuPagoClientError < StandardError; end
-  class EuPagoUnauthorizedError < StandardError; end
-  class EuPagoBadRequestError < StandardError; end
-  class EuPagoNotFoundError < StandardError; end
-  class EuPagoForbiddenError < StandardError; end
+  class ClientError < StandardError; end
+  class UnauthorizedError < StandardError; end
+  class BadRequestError < StandardError; end
+  class NotFoundError < StandardError; end
+  class ForbiddenError < StandardError; end
 end
