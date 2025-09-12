@@ -3,12 +3,12 @@ require "httparty"
 module EuPago
   module Mixins
     module Client
-      def initialize(config)
+      def initialize(config = {})
         options = Hash[config.map { |(k, v)| [k.to_sym, v] }]
-        @base_url = options[:base_url] || base_url(options[:append_base_url])
+        @base_url = options[:base_url] || self.build_base_url
       end
 
-      def base_url(append_base_url = "")
+      def build_base_url(append_base_url = "")
         if ENV["EUPAGO_SANDBOX"]
           "https://sandbox.eupago.pt/api#{append_base_url}"
         else
@@ -16,32 +16,24 @@ module EuPago
         end
       end
 
-      def get(api_url, query: {})
+      def get(api_url, query: {}, headers: {})
         result = HTTParty.get(
           api_url,
           base_uri: @base_url,
           format: :json,
-          headers: {
-            "Authorization" => ENV["EUPAGO_API_KEY"].to_s,
-            "Content-Type" => "application/json",
-            "Accept" => "application/json",
-          },
+          headers: build_headers(headers),
           query: query,
         )
 
         parse_result(result)
       end
 
-      def post(api_url, body: {})
+      def post(api_url, body: {}, headers: {})
         result = HTTParty.post(
           api_url,
           base_uri: @base_url,
           format: :json,
-          headers: {
-            "Authorization" => ENV["EUPAGO_API_KEY"].to_s,
-            "Content-Type" => "application/json",
-            "Accept" => "application/json",
-          },
+          headers: build_headers(headers),
           body: body,
         )
 
@@ -49,6 +41,18 @@ module EuPago
       end
 
       private
+
+      def build_headers(additional_headers = {})
+        headers = {
+          "Content-Type" => "application/json",
+          "Accept" => "application/json",
+          "User-Agent" => "",
+        }.merge(additional_headers)
+        
+        headers[:Authorization] = ENV["EUPAGO_API_KEY"].to_s if ENV["EUPAGO_API_KEY"]
+
+        headers
+      end
 
       def parse_result(result)
         if result.headers["content-type"] == "application/json"

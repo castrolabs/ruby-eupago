@@ -4,16 +4,10 @@ require_relative "../../ruby_eupago/mixins/initializer"
 module EuPago
   module Api
     module V1
-      class << self
-        def client
-          @client ||= EuPago::Client.new({ prepend_base_url: "/v1.02" })
-        end
-      end
-
       class Base
         class << self
           def client
-            EuPago::Api::V1.client
+            EuPago::Api.client
           end
         end
       end

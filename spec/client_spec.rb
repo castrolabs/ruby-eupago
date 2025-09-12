@@ -29,17 +29,4 @@ RSpec.describe(EuPago::Client) do
       expect(client.instance_variable_get(:@base_url)).to(eq("https://sandbox.eupago.pt/api"))
     end
   end
-
-  context "append_base_url option" do
-    it "appends the extra path segment in production" do
-      client = build_client(append_base_url: "/v1.02")
-      expect(client.instance_variable_get(:@base_url)).to(eq("https://clientes.eupago.pt/api/v1.02"))
-    end
-
-    it "appends the extra path segment in sandbox" do
-      ENV["EUPAGO_SANDBOX"] = "1"
-      client = build_client(append_base_url: "/v1.02")
-      expect(client.instance_variable_get(:@base_url)).to(eq("https://sandbox.eupago.pt/api/v1.02"))
-    end
-  end
 end
