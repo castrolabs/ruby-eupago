@@ -17,7 +17,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'httparty', '~> 0.23.1'
 
   spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'pry', '~> 0.14.1'
   spec.add_development_dependency 'rake', '~> 13.1.0'
   spec.add_development_dependency 'rubocop', '~> 1.59'
   spec.add_development_dependency 'rubocop-shopify', '~> 2.14'
