@@ -12,7 +12,7 @@ module EuPago
         def token(body)
           result = client.post("/auth/token", body: body, headers: { "Content-Type" => "application/x-www-form-urlencoded" })
           EuPago::Api.authentication = result
-          
+
           result
         end
       end

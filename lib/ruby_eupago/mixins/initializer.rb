@@ -5,7 +5,7 @@ module EuPago
     module Client
       def initialize(config = {})
         options = Hash[config.map { |(k, v)| [k.to_sym, v] }]
-        @base_url = options[:base_url] || self.build_base_url
+        @base_url = options[:base_url] || build_base_url
       end
 
       def build_base_url(append_base_url = "")
@@ -48,7 +48,7 @@ module EuPago
           "Accept" => "application/json",
           "User-Agent" => "",
         }.merge(additional_headers)
-        
+
         headers[:Authorization] = ENV["EUPAGO_API_KEY"].to_s if ENV["EUPAGO_API_KEY"]
 
         headers
