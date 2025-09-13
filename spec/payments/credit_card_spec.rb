@@ -53,7 +53,7 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
       it "Missing Authorization returns 401" do
         expect do
           described_class.subscription(params)
-        end.to(raise_error(EuPago::UnauthorizedError, /\[Eupago SDK] Unauthorized/))
+        end.to(raise_error(EuPago::UnauthorizedError, /\[Eupago SDK\] Unauthorized/))
       end
     end
   end
