@@ -1,6 +1,6 @@
 require_relative "../lib/ruby_eupago"
 require_relative "support/vcr_setup"
-require_relative "support/client_helper"
+require_relative "support/auth_spec_helper"
 require "webmock/rspec"
 
 RSpec.configure do |config|

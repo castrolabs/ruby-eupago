@@ -8,7 +8,7 @@ RSpec.describe(EuPago::Api::Auth, :vcr) do
     context "When Success" do
       it "Should be able to generate token", :focus do
         response = described_class.token({
-          grant_type: EuPago::Constants::GRANT_TYPES[:CLIENT_CREDENTIALS],
+          grant_type: EuPago::Constants::GRANT_TYPES[:client_credentials],
           client_id: ENV["EUPAGO_CLIENT_ID"],
           client_secret: ENV["EUPAGO_CLIENT_SECRET"],
         })

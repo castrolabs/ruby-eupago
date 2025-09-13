@@ -5,10 +5,8 @@ module EuPago
   module Api
     module V1
       class Base
-        class << self
-          def client
-            EuPago::Api.client
-          end
+        def self.client
+          EuPago::Api.client
         end
       end
     end

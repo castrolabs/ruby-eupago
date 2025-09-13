@@ -11,8 +11,6 @@ http_interactions:
       - application/x-www-form-urlencoded
       Accept:
       - application/json
-      User-Agent:
-      - ''
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -23,7 +21,7 @@ http_interactions:
       Server:
       - nginx/1.20.1
       Date:
-      - Fri, 12 Sep 2025 16:21:06 GMT
+      - Sat, 13 Sep 2025 01:11:24 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -48,6 +46,6 @@ http_interactions:
       - no-referrer
     body:
       encoding: UTF-8
-      string: '{"transactionStatus":"Success","access_token":"FILTERED","token_type":"Bearer","expires_in":432000}'
-  recorded_at: Fri, 12 Sep 2025 16:21:06 GMT
+      string: '{"transactionStatus":"Success","access_token":"<FILTERED>","token_type":"Bearer","expires_in":432000}'
+  recorded_at: Sat, 13 Sep 2025 01:11:24 GMT
 recorded_with: VCR 6.3.1

@@ -6,6 +6,7 @@ module EuPago
       def initialize(config = {})
         options = Hash[config.map { |(k, v)| [k.to_sym, v] }]
         @base_url = options[:base_url] || build_base_url
+        @include_api_key = options.fetch(:include_api_key, false)
       end
 
       def build_base_url(append_base_url = "")
@@ -29,12 +30,15 @@ module EuPago
       end
 
       def post(api_url, body: {}, headers: {})
+        kheader = build_headers(headers)
+        kbody = kheader["Content-Type"] == "application/json" ? body.to_json : body
+
         result = HTTParty.post(
           api_url,
           base_uri: @base_url,
           format: :json,
           headers: build_headers(headers),
-          body: body,
+          body: kbody,
         )
 
         parse_result(result)
@@ -49,7 +53,9 @@ module EuPago
           "User-Agent" => "",
         }.merge(additional_headers)
 
-        headers[:Authorization] = ENV["EUPAGO_API_KEY"].to_s if ENV["EUPAGO_API_KEY"]
+        if @include_api_key && ENV["EUPAGO_API_KEY"]
+          headers["Authorization"] = "ApiKey #{ENV["EUPAGO_API_KEY"]}"
+        end
 
         headers
       end
@@ -62,7 +68,7 @@ module EuPago
         end
 
         case result.code
-        when 200
+        when 200..299
           result.parsed_response
         when 401
           raise EuPago::UnauthorizedError, "[Eupago SDK] Unauthorized: #{response}"

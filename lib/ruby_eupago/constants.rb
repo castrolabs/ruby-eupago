@@ -3,9 +3,18 @@
 module EuPago
   module Constants
     GRANT_TYPES = {
-      CLIENT_CREDENTIALS: "client_credentials",
-      REFRESH: "refresh_token",
-      PASSWORD: "password",
+      client_credentials: "client_credentials",
+      refresh: "refresh_token",
+      password: "password",
+    }.freeze
+
+    RECURRENT_PAYMENT_INTERVALS = {
+      weekly: "Semanal",
+      biweekly: "Quinzenal",
+      monthly: "Mensal",
+      trimesterly: "Trimestral",
+      semiannual: "Semestral",
+      annual: "Anual",
     }.freeze
   end
 end

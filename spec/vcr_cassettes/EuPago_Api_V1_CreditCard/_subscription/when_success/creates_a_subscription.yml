@@ -16,8 +16,8 @@ http_interactions:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
     status:
-      code: 401
-      message: Unauthorized
+      code: 201
+      message: Created
     headers:
       Server:
       - nginx/1.20.1
@@ -37,9 +37,16 @@ http_interactions:
       - no-store, no-cache, must-revalidate
       Pragma:
       - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000;
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - no-referrer
     body:
       encoding: UTF-8
-      string: '{"transactionStatus":"Rejected","code":"APIKEY_MISSING","text":"API
-        Key was not available in the request"}'
+      string: '{"transactionStatus":"Success","statusSubs":"Pending","subscriptionID":"<FILTERED>","referenceSubs":"<FILTERED>","redirectUrl":"<FILTERED>"}'
   recorded_at: Sat, 13 Sep 2025 01:11:24 GMT
 recorded_with: VCR 6.3.1
