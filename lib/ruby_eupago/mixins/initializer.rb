@@ -3,52 +3,62 @@ require "httparty"
 module EuPago
   module Mixins
     module Client
-      def initialize(config)
+      def initialize(config = {})
         options = Hash[config.map { |(k, v)| [k.to_sym, v] }]
-        @base_url = options[:base_url] || base_url(options[:append_base_url])
+        @base_url = options[:base_url] || build_base_url
+        @include_api_key = options.fetch(:include_api_key, false)
       end
 
-      def base_url(append_base_url = "")
-        if ENV["EUPAGO_SANDBOX"]
+      def build_base_url(append_base_url = "")
+        if ENV["EUPAGO_PRODUCTION"].to_s.empty?
           "https://sandbox.eupago.pt/api#{append_base_url}"
         else
           "https://clientes.eupago.pt/api#{append_base_url}"
         end
       end
 
-      def get(api_url, query: {})
+      def get(api_url, query: {}, headers: {})
         result = HTTParty.get(
           api_url,
           base_uri: @base_url,
           format: :json,
-          headers: {
-            "Authorization" => ENV["EUPAGO_API_KEY"].to_s,
-            "Content-Type" => "application/json",
-            "Accept" => "application/json",
-          },
+          headers: build_headers(headers),
           query: query,
         )
 
         parse_result(result)
       end
 
-      def post(api_url, body: {})
+      def post(api_url, body: {}, headers: {})
+        kheader = build_headers(headers)
+        kbody = kheader["Content-Type"] == "application/json" ? body.to_json : body
+
         result = HTTParty.post(
           api_url,
           base_uri: @base_url,
           format: :json,
-          headers: {
-            "Authorization" => ENV["EUPAGO_API_KEY"].to_s,
-            "Content-Type" => "application/json",
-            "Accept" => "application/json",
-          },
-          body: body,
+          headers: kheader,
+          body: kbody,
         )
 
         parse_result(result)
       end
 
       private
+
+      def build_headers(additional_headers = {})
+        headers = {
+          "Content-Type" => "application/json",
+          "Accept" => "application/json",
+          "User-Agent" => "",
+        }.merge(additional_headers)
+
+        if @include_api_key && ENV["EUPAGO_API_KEY"]
+          headers["Authorization"] = "ApiKey #{ENV["EUPAGO_API_KEY"]}"
+        end
+
+        headers
+      end
 
       def parse_result(result)
         if result.headers["content-type"] == "application/json"
@@ -58,7 +68,7 @@ module EuPago
         end
 
         case result.code
-        when 200
+        when 200..299
           result.parsed_response
         when 401
           raise EuPago::UnauthorizedError, "[Eupago SDK] Unauthorized: #{response}"
