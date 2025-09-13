@@ -6,7 +6,7 @@ RSpec.describe(EuPago::Client) do
   end
 
   context "base url (production)" do
-    it "uses production host when EUPAGO_SANDBOX is not set" do
+    it "uses production host when EUPAGO_PRODUCTION is set" do
       ENV["EUPAGO_PRODUCTION"] = "1"
       client = build_client
       expect(client.instance_variable_get(:@base_url)).to(eq("https://clientes.eupago.pt/api"))
@@ -14,8 +14,14 @@ RSpec.describe(EuPago::Client) do
   end
 
   context "base url (sandbox)" do
-    it "uses sandbox host when EUPAGO_SANDBOX is set" do
+    it "uses sandbox host when EUPAGO_PRODUCTION is not set" do
       ENV["EUPAGO_PRODUCTION"] = ""
+      client = build_client
+      expect(client.instance_variable_get(:@base_url)).to(eq("https://sandbox.eupago.pt/api"))
+    end
+
+    it "uses sandbox host when EUPAGO_PRODUCTION is nil" do
+      ENV["EUPAGO_PRODUCTION"] = nil
       client = build_client
       expect(client.instance_variable_get(:@base_url)).to(eq("https://sandbox.eupago.pt/api"))
     end

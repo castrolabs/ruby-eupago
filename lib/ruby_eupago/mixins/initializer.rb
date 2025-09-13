@@ -10,7 +10,7 @@ module EuPago
       end
 
       def build_base_url(append_base_url = "")
-        if ENV["EUPAGO_PRODUCTION"].empty?
+        if ENV["EUPAGO_PRODUCTION"].to_s.empty?
           "https://sandbox.eupago.pt/api#{append_base_url}"
         else
           "https://clientes.eupago.pt/api#{append_base_url}"
