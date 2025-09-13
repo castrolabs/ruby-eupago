@@ -37,7 +37,7 @@ module EuPago
           api_url,
           base_uri: @base_url,
           format: :json,
-          headers: build_headers(headers),
+          headers: kheader,
           body: kbody,
         )
 
