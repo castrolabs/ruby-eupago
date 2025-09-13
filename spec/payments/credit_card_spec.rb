@@ -43,6 +43,19 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
         expect(response["referenceSubs"]).not_to(be_nil)
         expect(response["redirectUrl"]).not_to(be_nil)
       end
+
+      it "creates a subscription with auto process" do
+        params["payment"]["subscription"]["autoProcess"] = 1
+        params["payment"]["subscription"]["collectionDay"] = Date.today.day
+
+        response = described_class.subscription(params)
+
+        expect(response["transactionStatus"]).to(eq("Success"))
+        expect(response["statusSubs"]).to(eq("Pending"))
+        expect(response["subscriptionID"]).not_to(be_nil)
+        expect(response["referenceSubs"]).not_to(be_nil)
+        expect(response["redirectUrl"]).not_to(be_nil)
+      end
     end
     context "when failure" do
       before(:each) do
