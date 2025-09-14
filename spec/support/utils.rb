@@ -1,4 +1,8 @@
 module Utils
+  def self.customer_email
+    "alexoliveira7x+eupagotester@gmail.com"
+  end
+
   def self.deep_merge(hash1, hash2)
     hash1.merge(hash2) do |_key, v1, v2|
       if v1.is_a?(Hash) && v2.is_a?(Hash)
