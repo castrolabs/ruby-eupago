@@ -14,6 +14,7 @@ class SubscriptionSpecHelper
           "collectionDay" => nil,
           "periodicity" => EuPago::Constants::RECURRENT_PAYMENT_INTERVALS[:monthly],
           "date" => Date.today.strftime("%Y-%m-%d"),
+          "limitDate" => (Date.today >> 12).strftime("%Y-%m-%d"),
           "customer" => {
             "notify" => true,
             "email" => "alexoliveira7x+eupagotester@gmail.com",

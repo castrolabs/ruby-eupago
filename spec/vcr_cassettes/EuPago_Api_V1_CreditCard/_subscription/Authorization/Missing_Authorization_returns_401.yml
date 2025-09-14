@@ -5,7 +5,7 @@ http_interactions:
     uri: https://sandbox.eupago.pt/api/v1.02/creditcard/subscription
     body:
       encoding: UTF-8
-      string: '{"payment":{"identifier":"Test Subscription","amount":{"currency":"EUR","value":10},"subscription":{"autoProcess":0,"collectionDay":null,"periodicity":"Mensal","date":"2025-09-13","limitDate":"2026-09-13","customer":{"notify":true,"email":"alexoliveira7x+eupagotester@gmail.com","phone":null,"name":"Test
+      string: '{"payment":{"identifier":"Test Subscription","amount":{"currency":"EUR","value":10},"subscription":{"autoProcess":0,"collectionDay":null,"periodicity":"Mensal","date":"2025-09-14","limitDate":"2026-09-14","customer":{"notify":true,"email":"alexoliveira7x+eupagotester@gmail.com","phone":null,"name":"Test
         User"}},"successUrl":"https://www.test.com/success","failUrl":"https://www.test.com/fail","backUrl":"https://www.test.com/back","lang":"PT","minutesFormUp":1440}}'
     headers:
       Content-Type:
@@ -22,7 +22,7 @@ http_interactions:
       Server:
       - nginx/1.20.1
       Date:
-      - Sat, 13 Sep 2025 01:11:24 GMT
+      - Sun, 14 Sep 2025 18:27:17 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -41,5 +41,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"transactionStatus":"Rejected","code":"APIKEY_MISSING","text":"API
         Key was not available in the request"}'
-  recorded_at: Sat, 13 Sep 2025 01:11:24 GMT
+  recorded_at: Sun, 14 Sep 2025 18:27:17 GMT
 recorded_with: VCR 6.3.1

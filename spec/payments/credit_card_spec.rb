@@ -4,8 +4,7 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
   describe "#subscription" do
     context "when success" do
       it "creates a subscription" do
-        params = SubscriptionSpecHelper.valid_attributes
-        response = described_class.subscription(params)
+        response = described_class.subscription(SubscriptionSpecHelper.valid_attributes)
 
         expect(response["transactionStatus"]).to(eq("Success"))
         expect(response["statusSubs"]).to(eq("Pending"))
@@ -35,33 +34,82 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
     end
 
     context "when failure" do
-      it "Missing Authorization returns 401" do
-        ENV.delete("EUPAGO_API_KEY")
-
-        expect do
-          described_class.subscription(params)
-        end.to(raise_error(EuPago::UnauthorizedError, /\[Eupago SDK\] Unauthorized/))
-      end
-
       it "When payment gateway fails" do
         expect do
           described_class.subscription(SubscriptionSpecHelper.valid_attributes)
         end.to(raise_error(EuPago::ClientError, /\[Eupago SDK\] Error/))
       end
     end
+
+    context "Authorization" do
+      before do
+        @original_api_key = ENV["EUPAGO_API_KEY"]
+        ENV.delete("EUPAGO_API_KEY")
+      end
+
+      after do
+        ENV["EUPAGO_API_KEY"] = @original_api_key
+      end
+
+      it "Missing Authorization returns 401" do
+        expect do
+          described_class.subscription(SubscriptionSpecHelper.valid_attributes)
+        end.to(raise_error(EuPago::UnauthorizedError, /\[Eupago SDK\] Unauthorized/))
+      end
+    end
   end
 
   describe "#payment" do
     context "when success" do
-      it "processes a recurrent payment", :tty, :broken do
+      it "processes a recurrent payment", :tty do
         params = SubscriptionSpecHelper.valid_attributes
         response = described_class.subscription(params)
-        
-        input("Visit >> #{subscription["redirectUrl"]} << and finish payment with fake credit card before continue... Press enter to continue")
-        payment_response = described_class.subscription(response["subscriptionID"], PaymentSpecHelper.valid_attributes)
-        
-        # TODO: Add expectations
-        binding.irb
+
+        # Only as for tty mode and when recording a new cassette
+        if VCR.current_cassette.recording?
+          # https://eupago.readme.io/reference/test-cards
+          input("Visit >> #{response["redirectUrl"]} << and finish payment with fake credit card before continue... Press enter to continue")
+        end
+
+        payment_response = described_class.payment(response["subscriptionID"], PaymentSpecHelper.valid_attributes)
+
+        expect(payment_response["transactionStatus"]).to(eq("Success"))
+        expect(payment_response["status"]).to(eq("Paid"))
+        expect(payment_response["transactionID"]).not_to(be_nil)
+        expect(payment_response["reference"]).not_to(be_nil)
+        expect(payment_response["message"]).to(eq("Payment has been executed successfully."))
+      end
+    end
+
+    context "when failure" do
+      it "process the payment without finish OTP", :tty do
+        SubscriptionSpecHelper.valid_attributes
+        response = described_class.subscription(SubscriptionSpecHelper.valid_attributes)
+
+        # Only as for tty mode and when recording a new cassette
+        if VCR.current_cassette.recording?
+          # https://eupago.readme.io/reference/test-cards
+          input("Visit >> #{response["redirectUrl"]} << and finish payment with fake credit card before continue... Press enter to continue")
+        end
+
+        expect do
+          described_class.payment(response["subscriptionID"], PaymentSpecHelper.valid_attributes)
+        end.to(raise_error(EuPago::BadRequestError, /\[Eupago SDK\] Bad Request/))
+      end
+
+      it "process the payment after OTP fails", :tty do
+        SubscriptionSpecHelper.valid_attributes
+        response = described_class.subscription(SubscriptionSpecHelper.valid_attributes)
+
+        # Only as for tty mode and when recording a new cassette
+        if VCR.current_cassette.recording?
+          # https://eupago.readme.io/reference/test-cards
+          input("Visit >> #{response["redirectUrl"]} << and finish payment with fake credit card before continue... Press enter to continue")
+        end
+
+        expect do
+          described_class.payment(response["subscriptionID"], PaymentSpecHelper.valid_attributes)
+        end.to(raise_error(EuPago::BadRequestError, /\[Eupago SDK\] Bad Request/))
       end
     end
   end

@@ -30,6 +30,7 @@ VCR.configure do |config|
       "Accept-Encoding",
     ]
 
+    # Only keep allowed headers
     interaction.response.headers.select! { |key, _| allowed_headers.include?(key) }
     interaction.request.headers.select! { |key, _| allowed_headers.include?(key) }
 
@@ -38,6 +39,8 @@ VCR.configure do |config|
       "referenceSubs",
       "redirectUrl",
       "access_token",
+      "transactionID",
+      "reference",
     ]
 
     response_body = begin
@@ -46,12 +49,18 @@ VCR.configure do |config|
       {}
     end
 
+    # Protect sensitive data in response body
     filtered_response_sensitive_data.each do |data|
       if response_body.key?(data)
-        response_body[data] = "<FILTERED>"
+        response_body[data] = "FILTERED"
       end
     end
 
     interaction.response.body = response_body.to_json
+
+    # Protect dynamic URL segments
+    if interaction.request.uri.match?(%r{creditcard/payment/[^/]+})
+      interaction.request.uri.gsub!(%r{creditcard/payment/[^/]+}, "creditcard/payment/FILTERED")
+    end
   end
 end
