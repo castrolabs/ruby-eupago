@@ -17,7 +17,7 @@ class SubscriptionSpecHelper
           "limitDate" => (Date.today >> 12).strftime("%Y-%m-%d"),
           "customer" => {
             "notify" => true,
-            "email" => "alexoliveira7x+eupagotester@gmail.com",
+            "email" => Utils.customer_email,
             "phone" => nil,
             "name" => "Test User",
           },
