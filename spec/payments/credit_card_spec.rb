@@ -52,15 +52,17 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
   end
 
   describe "#payment" do
-    it "processes a recurrent payment", :tty, :broken do
-      params = SubscriptionSpecHelper.valid_attributes
-      response = described_class.subscription(params)
-
-      input("Visit >> #{subscription["redirectUrl"]} << and finish payment with fake credit card before continue... Press enter to continue")
-      payment_response = described_class.subscription(response["subscriptionID"], PaymentSpecHelper.valid_attributes)
-
-      # TODO: Add expectations
-      binding.irb
+    context "when success" do
+      it "processes a recurrent payment", :tty, :broken do
+        params = SubscriptionSpecHelper.valid_attributes
+        response = described_class.subscription(params)
+        
+        input("Visit >> #{subscription["redirectUrl"]} << and finish payment with fake credit card before continue... Press enter to continue")
+        payment_response = described_class.subscription(response["subscriptionID"], PaymentSpecHelper.valid_attributes)
+        
+        # TODO: Add expectations
+        binding.irb
+      end
     end
   end
 end
