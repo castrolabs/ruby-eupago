@@ -4,7 +4,7 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
   describe "#subscription" do
     context "when success" do
       it "creates a subscription" do
-        response = described_class.subscription(SubscriptionSpecHelper.valid_attributes)
+        response = described_class.subscription(PaymentSpecHelper::Subscription.credid_card_attributes)
 
         expect(response["transactionStatus"]).to(eq("Success"))
         expect(response["statusSubs"]).to(eq("Pending"))
@@ -14,7 +14,7 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
       end
 
       it "creates a subscription with auto process" do
-        params = SubscriptionSpecHelper.valid_attributes({
+        params = PaymentSpecHelper::Subscription.credid_card_attributes({
           "payment" => {
             "subscription" => {
               "autoProcess" => 1,
@@ -36,7 +36,7 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
     context "when failure" do
       it "When payment gateway fails" do
         expect do
-          described_class.subscription(SubscriptionSpecHelper.valid_attributes)
+          described_class.subscription(PaymentSpecHelper::Subscription.credid_card_attributes)
         end.to(raise_error(EuPago::ClientError, /\[Eupago SDK\] Error/))
       end
     end
@@ -53,7 +53,7 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
 
       it "Missing Authorization returns 401" do
         expect do
-          described_class.subscription(SubscriptionSpecHelper.valid_attributes)
+          described_class.subscription(PaymentSpecHelper::Subscription.credid_card_attributes)
         end.to(raise_error(EuPago::UnauthorizedError, /\[Eupago SDK\] Unauthorized/))
       end
     end
@@ -62,7 +62,7 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
   describe "#payment" do
     context "when success" do
       it "processes a recurrent payment", :tty do
-        params = SubscriptionSpecHelper.valid_attributes
+        params = PaymentSpecHelper::Subscription.credid_card_attributes
         response = described_class.subscription(params)
 
         # Only as for tty mode and when recording a new cassette
@@ -71,7 +71,7 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
           input("Visit >> #{response["redirectUrl"]} << and finish payment with fake credit card before continue... Press enter to continue")
         end
 
-        payment_response = described_class.payment(response["subscriptionID"], PaymentSpecHelper.valid_attributes)
+        payment_response = described_class.payment(response["subscriptionID"], PaymentSpecHelper::Subscription.credid_card_attributes)
 
         expect(payment_response["transactionStatus"]).to(eq("Success"))
         expect(payment_response["status"]).to(eq("Paid"))
@@ -83,8 +83,8 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
 
     context "when failure" do
       it "process the payment without finish OTP", :tty do
-        SubscriptionSpecHelper.valid_attributes
-        response = described_class.subscription(SubscriptionSpecHelper.valid_attributes)
+        PaymentSpecHelper::Subscription.credid_card_attributes
+        response = described_class.subscription(PaymentSpecHelper::Subscription.credid_card_attributes)
 
         # Only as for tty mode and when recording a new cassette
         if VCR.current_cassette.recording?
@@ -93,13 +93,13 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
         end
 
         expect do
-          described_class.payment(response["subscriptionID"], PaymentSpecHelper.valid_attributes)
+          described_class.payment(response["subscriptionID"], PaymentSpecHelper::Subscription.credid_card_attributes)
         end.to(raise_error(EuPago::BadRequestError, /\[Eupago SDK\] Bad Request/))
       end
 
       it "process the payment after OTP fails", :tty do
-        SubscriptionSpecHelper.valid_attributes
-        response = described_class.subscription(SubscriptionSpecHelper.valid_attributes)
+        PaymentSpecHelper::Subscription.credid_card_attributes
+        response = described_class.subscription(PaymentSpecHelper::Subscription.credid_card_attributes)
 
         # Only as for tty mode and when recording a new cassette
         if VCR.current_cassette.recording?
@@ -108,7 +108,7 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
         end
 
         expect do
-          described_class.payment(response["subscriptionID"], PaymentSpecHelper.valid_attributes)
+          described_class.payment(response["subscriptionID"], PaymentSpecHelper::Payment.credit_card_attributes)
         end.to(raise_error(EuPago::BadRequestError, /\[Eupago SDK\] Bad Request/))
       end
     end

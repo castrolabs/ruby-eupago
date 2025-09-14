@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.eupago.pt/api/v1.02/directdebit/authorization
+    body:
+      encoding: UTF-8
+      string: '{"debtor":{"address":{"zipCode":"1234-5678","country":"PT","street":"Rua
+        das coisas","locality":"Lisboa"},"iban":"PT50123443211234567890172","name":"NomeDoDevedor","bic":"CGDIPTPL","email":"alexoliveira7x+eupagotester@gmail.com"},"payment":{"autoProcess":"0","type":"RCUR","date":"2025-09-14","amount":20,"collectionDay":14,"periodicity":"Mensal","limitDate":"2026-09-14"},"adminCallback":null,"identifier":"Test
+        Direct Debit Subscription"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.20.1
+      Date:
+      - Sun, 14 Sep 2025 19:49:43 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/8.0.30
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000;
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - no-referrer
+    body:
+      encoding: UTF-8
+      string: '{"transactionStatus":"Success","reference":"FILTERED"}'
+  recorded_at: Sun, 14 Sep 2025 19:49:43 GMT
+recorded_with: VCR 6.3.1
