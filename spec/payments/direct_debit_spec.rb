@@ -14,8 +14,8 @@ RSpec.describe(EuPago::Api::V1::DirectDebit, :vcr) do
     it "raises an error when attempting payment without prior authorization" do
       response = described_class.authorization(PaymentSpecHelper::Subscription.direct_debit_attributes)
 
-      # This spec has not success, because the payment needs to be authorized by the client and trusted by Gateway
-      # It will raise an error 400 Bad Request
+      # This spec fails because the payment requires prior client authorization and gateway approval.
+      # Attempting payment without these steps results in a 400 Bad Request error.
       expect do
         described_class.payment(response["reference"], PaymentSpecHelper::Payment.direct_debit_attributes)
       end.to(raise_error(EuPago::BadRequestError))
