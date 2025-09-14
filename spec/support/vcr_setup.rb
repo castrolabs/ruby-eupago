@@ -59,8 +59,8 @@ VCR.configure do |config|
     interaction.response.body = response_body.to_json
 
     # Protect dynamic URL segments
-    if interaction.request.uri.match?(%r{creditcard/payment/[^/]+})
-      interaction.request.uri.gsub!(%r{creditcard/payment/[^/]+}, "creditcard/payment/FILTERED")
+    if interaction.request.uri.match?(%r{(creditcard|directdebit)/payment/[^/]+})
+      interaction.request.uri.gsub!(%r{(creditcard|directdebit)/payment/[^/]+}, '\1/payment/FILTERED')
     end
   end
 end

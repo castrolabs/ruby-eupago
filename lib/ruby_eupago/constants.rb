@@ -16,5 +16,11 @@ module EuPago
       semiannual: "Semestral",
       annual: "Anual",
     }.freeze
+
+    PAYMENT_TYPES = {
+      once: "OOFF",
+      recurring: "RCUR",
+      final: "FNAL",
+    }
   end
 end

@@ -15,3 +15,4 @@ end
 
 require_relative "v1/credit_card"
 require_relative "v1/mbway"
+require_relative "v1/direct_debit"
