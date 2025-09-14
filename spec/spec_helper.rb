@@ -1,6 +1,8 @@
 require_relative "../lib/ruby_eupago"
 require_relative "support/vcr_setup"
 require_relative "support/auth_spec_helper"
+require_relative "support/subscription_spec_helper"
+require_relative "support/payment_spec_helper"
 require "webmock/rspec"
 
 RSpec.configure do |config|
@@ -13,4 +15,9 @@ RSpec.configure do |config|
   end
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
+end
+
+def input(message)
+  puts(message)
+  $stdin.gets
 end
