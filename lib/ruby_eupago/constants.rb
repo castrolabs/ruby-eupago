@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module EuPago
   module Constants
     GRANT_TYPES = {

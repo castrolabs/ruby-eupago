@@ -1,5 +1,4 @@
-require_relative "mixins/initializer"
-require_relative "api/v1"
+require "ruby_eupago/mixins/initializer"
 
 module EuPago
   class Client
