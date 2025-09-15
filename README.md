@@ -4,7 +4,53 @@ This is a not official Ruby SDK for the EuPago payment gateway.
 
 ## Installation
 
-WIP
+```ruby
+gem 'ruby-eupago', '~> 0.1.0'
+```
+
+## Usage
+
+First, set your credentials as environment variables:
+
+```bash
+export EUPAGO_CLIENT_ID=your_client_id
+export EUPAGO_CLIENT_SECRET=your_client_secret
+export EUPAGO_API_KEY=your_api_key
+```
+
+Then, in your Ruby code:
+
+```ruby
+require 'ruby-eupago'
+
+# Example: Create a direct debit authorization
+response = EuPago::Api::V1::DirectDebit.authorization({
+	"debtor" => {
+		"name" => "John Doe",
+		"iban" => "PT50123443211234567890172",
+		"email" => "john@example.com",
+		"address" => {
+			"zipCode" => "1234-5678",
+			"country" => "PT",
+			"street" => "Rua das coisas",
+			"locality" => "Lisboa"
+		},
+		"bic" => "CGDIPTPL"
+	},
+	"payment" => {
+		"autoProcess" => "0",
+		"type" => EuPago::Constants::PAYMENT_TYPES[:recurring],
+		"date" => "2025-09-15",
+		"amount" => 20,
+		"periodicity" => EuPago::Constants::RECURRENT_PAYMENT_INTERVALS[:monthly]
+	},
+	"identifier" => "Test Direct Debit Subscription"
+})
+
+puts response
+```
+
+For more advanced usage, see the `spec/` directory for real-world examples.
 
 ## Testing
 
