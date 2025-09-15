@@ -1,7 +1,7 @@
-require_relative 'lib/ruby_eupago/version'
+require_relative 'lib/ruby-eupago/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'ruby_eupago'
+  spec.name = 'ruby-eupago'
   spec.version     = EuPago::Version::STRING
   spec.date        = '2025-09-10'
   spec.summary     = 'Eupago Ruby SDK'
@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.0.0'
   spec.require_paths = ['lib']
-  spec.files = Dir['{lib}/**/*'] + ['README.md', 'CHANGELOG.md', 'ruby_eupago.gemspec']
+  spec.files = Dir['{lib}/**/*'] + ['README.md', 'CHANGELOG.md', 'ruby-eupago.gemspec']
 
   spec.add_dependency 'httparty', '~> 0.23.1'
 

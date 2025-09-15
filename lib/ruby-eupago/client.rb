@@ -1,4 +1,4 @@
-require "ruby_eupago/mixins/initializer"
+require "ruby-eupago/mixins/initializer"
 
 module EuPago
   class Client

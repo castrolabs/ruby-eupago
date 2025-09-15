@@ -7,7 +7,7 @@ AllCops:
     - Gemfile
     - 'lib/**/*.rb'
   Exclude:
-    - ruby_eupago.gemspec
+    - ruby-eupago.gemspec
     - vendor/**/*
     - Rakefile.rb
 
