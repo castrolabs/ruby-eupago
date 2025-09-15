@@ -8,6 +8,6 @@ module EuPago
   end
 end
 
-require_relative "v1/credit_card"
-require_relative "v1/mbway"
-require_relative "v1/direct_debit"
+require "ruby_eupago/api/v1/credit_card"
+require "ruby_eupago/api/v1/mbway"
+require "ruby_eupago/api/v1/direct_debit"
