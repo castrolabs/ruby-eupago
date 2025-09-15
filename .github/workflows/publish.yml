@@ -1,0 +1,26 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.9'
+          bundler-cache: true
+
+      - name: Publish
+        uses: rubygems/release-gem@v1
