@@ -4,8 +4,8 @@ Gem::Specification.new do |spec|
   spec.name = 'ruby-eupago'
   spec.version     = EuPago::Version::STRING
   spec.date        = '2025-09-10'
-  spec.summary     = 'Eupago Ruby SDK'
-  spec.description = 'Eupago Ruby SDK'
+  spec.summary     = 'Unofficial Ruby SDK for EuPago payment gateway.'
+  spec.description = 'A convenient, unofficial Ruby SDK for integrating with the EuPago payment gateway. Includes authentication helpers, VCR-based test suite, and a structure SDK.'
   spec.authors     = ['Alexandro Castro']
   spec.email       = 'alexoliveira7x@gmail.com'
   spec.license = 'MIT'
