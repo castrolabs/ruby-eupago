@@ -1,5 +1,3 @@
-require_relative "../api"
-
 module EuPago
   module Api
     module Auth
@@ -8,7 +6,7 @@ module EuPago
         result = EuPago::Client.new.post("/auth/token", body: body, headers: {
           "Content-Type" => "application/x-www-form-urlencoded",
         })
-        EuPago::Api.auth = result
+        EuPago::Current.auth = result
         result
       end
     end
