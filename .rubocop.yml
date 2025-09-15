@@ -22,3 +22,7 @@ Style/ClassAndModuleChildren:
 
 Style/ConditionalAssignment:
   Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - 'lib/ruby-eupago.rb'
