@@ -61,6 +61,8 @@ module EuPago
       end
 
       def parse_result(result)
+        binding.irb
+
         if result.headers["content-type"] == "application/json"
           response = result.parsed_response
         else

@@ -67,6 +67,25 @@ module PaymentSpecHelper
     def self.credit_card_attributes(overrides = {})
       base_attributes = {
         "payment" => {
+          "identifier" => "Test One time credit card payment",
+          "amount" => {
+            "currency" => "EUR",
+            "value" => 10,
+          },
+          "successUrl" => "https://www.test.com/success",
+          "failUrl" => "https://www.test.com/fail",
+          "backUrl" => "https://www.test.com/back",
+          "lang" => "PT",
+          "minutesFormUp" => 1440,
+        },
+      }
+
+      Utils.deep_merge(base_attributes, overrides)
+    end
+  
+    def self.credit_card_missing_url_attributes(overrides = {})
+      base_attributes = {
+        "payment" => {
           "identifier" => "Test Payment",
           "amount" => {
             "currency" => "EUR",

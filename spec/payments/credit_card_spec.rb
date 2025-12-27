@@ -62,7 +62,7 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
   describe "#payment" do
     context "when success" do
       it "processes a recurrent payment", :tty do
-        params = PaymentSpecHelper::Subscription.credid_card_attributes
+        params = PaymentSpecHelper::Subscription.credit_card_attributes
         response = described_class.subscription(params)
 
         # Only as for tty mode and when recording a new cassette
@@ -78,6 +78,36 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
         expect(payment_response["transactionID"]).not_to(be_nil)
         expect(payment_response["reference"]).not_to(be_nil)
         expect(payment_response["message"]).to(eq("Payment has been executed successfully."))
+      end
+
+      it "Process a one time credit card payment", tty: true do
+        response = described_class.create(PaymentSpecHelper::Payment.credit_card_attributes)
+      
+        expect(response["redirectUrl"]).not_to(be_nil)
+        if VCR.current_cassette.recording?
+          # https://eupago.readme.io/reference/test-cards
+          input("Visit >> #{response["redirectUrl"]} << and finish payment with fake credit card before continue... Press enter to continue")
+        end
+
+        expect(response["transactionStatus"]).to(eq("Success"))
+        expect(response["transactionID"]).not_to(be_nil)
+        expect(response["reference"]).not_to(be_nil)
+
+        # TODO: Check status after success payment
+        # transaction = EuPago::Api::V1::Payouts.transaction_details(response["transactionID"])
+        # expect(transaction["transactionStatus"]).to(eq(""))
+      end
+      
+      it "get staus without paying a one time credit card payment", focus: true do
+        response = described_class.create(PaymentSpecHelper::Payment.credit_card_attributes)
+        expect(response["transactionStatus"]).to(eq("Success"))
+        expect(response["redirectUrl"]).not_to(be_nil)
+        expect(response["transactionID"]).not_to(be_nil)
+        expect(response["reference"]).not_to(be_nil)
+
+        # TODO: Check status without paying
+        # transaction = EuPago::Api::V1::Payouts.transaction_details(response["transactionID"])
+        # expect(transaction["transactionStatus"]).to(eq(""))
       end
     end
 
@@ -108,8 +138,26 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
         end
 
         expect do
-          described_class.payment(response["subscriptionID"], PaymentSpecHelper::Payment.credit_card_attributes)
+          described_class.payment(response["subscriptionID"], PaymentSpecHelper::Payment.credit_card_missing_url_attributes)
         end.to(raise_error(EuPago::BadRequestError, /\[Eupago SDK\] Bad Request/))
+      end
+
+      it "Process a one time credit card payment and fails", tty: true, focus: true do
+        response = described_class.create(PaymentSpecHelper::Payment.credit_card_attributes)
+      
+        expect(response["redirectUrl"]).not_to(be_nil)
+        if VCR.current_cassette.recording?
+          # https://eupago.readme.io/reference/test-cards
+          input("Visit >> #{response["redirectUrl"]} << and finish payment with fake credit card before continue... Press enter to continue")
+        end
+        binding.irb
+        expect(response["transactionStatus"]).to(eq("Success"))
+        expect(response["transactionID"]).not_to(be_nil)
+        expect(response["reference"]).not_to(be_nil)
+        
+        # TODO: Check failure status after payment
+        # transaction = EuPago::Api::V1::Payouts.transaction_details(response["transactionID"])
+        # expect(transaction["transactionStatus"]).to(eq(""))
       end
     end
   end
