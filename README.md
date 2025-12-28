@@ -5,7 +5,7 @@ This is a not official Ruby SDK for the EuPago payment gateway.
 ## Installation
 
 ```ruby
-gem 'ruby-eupago', '~> 0.1.0'
+gem 'ruby-eupago', '~> 0.2.0'
 ```
 
 ## Usage
