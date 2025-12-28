@@ -17,8 +17,8 @@ module EuPago
         # Fetches references by status with optional parameters.
         #
         # @param params [Hash] Optional parameters for the request.
-        # @option params [String] :status Choose the status to search (use EuPago::Constants::REFERENCE_STATUS values: paga, pendente, expirada, erro, cancelada, reembolsada, devolvida, arquivada).
-        # @doc https://eupago.readme.io/reference/references-by-status
+        # @option params [String] :status Choose the status to search (EuPago::Constants::REFERENCE_STATUS)
+        # @docs https://eupago.readme.io/reference/references-by-status
         #
         def self.list_by_status(params = {})
           V1.oauth_client.get("/management/v1.02/references", query: params)
