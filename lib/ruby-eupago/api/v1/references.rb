@@ -23,6 +23,31 @@ module EuPago
         def self.list_by_status(params = {})
           V1.oauth_client.get("/management/v1.02/references", query: params)
         end
+
+
+        # Fetches reference information by reference and entity.
+        #
+        # @param body [Hash] Required parameters for the request.
+        # @option body [String] :referencia Reference identifier to search for.
+        # @option body [String] :entidade Entity associated with the reference (Not all services have an entity).
+        #
+        # @return [Hash] Reference information response from the API.
+        #
+        # @docs https://eupago.readme.io/reference/reference-information
+        def self.find(body)
+          V1.body_client.post("/clientes/rest_api/multibanco/info", body: body)
+        end
+
+        # =========
+        # Alias Methods
+        # =========
+
+        # Fetches reference information by reference.
+        # @alias find_by_reference for find method with reference parameter.
+        #
+        def self.find_by_reference(reference, body = {})
+          self.find(body.merge({ referencia: reference }))
+        end
       end
     end
   end
