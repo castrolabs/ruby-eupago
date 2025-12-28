@@ -8,6 +8,10 @@ module EuPago
       def self.oauth_client
         @oauth_client ||= EuPago::Api.oauth_client
       end
+
+      def self.body_client
+        @body_client ||= EuPago::Api.body_client
+      end
     end
   end
 end
