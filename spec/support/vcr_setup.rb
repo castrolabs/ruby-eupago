@@ -41,6 +41,7 @@ VCR.configure do |config|
       "access_token",
       "transactionID",
       "reference",
+      "trid",
     ]
 
     response_body = begin
@@ -49,18 +50,33 @@ VCR.configure do |config|
       {}
     end
 
-    # Protect sensitive data in response body
-    filtered_response_sensitive_data.each do |data|
-      if response_body.key?(data)
-        response_body[data] = "FILTERED"
+    # Recursively filter sensitive data in response body
+    def filter_sensitive_data_recursive(obj, sensitive_keys)
+      case obj
+      when Hash
+        obj.each do |key, value|
+          if sensitive_keys.include?(key)
+            obj[key] = "FILTERED"
+          else
+            filter_sensitive_data_recursive(value, sensitive_keys)
+          end
+        end
+      when Array
+        obj.each { |item| filter_sensitive_data_recursive(item, sensitive_keys) }
       end
+      obj
     end
 
+    filter_sensitive_data_recursive(response_body, filtered_response_sensitive_data)
     interaction.response.body = response_body.to_json
 
     # Protect dynamic URL segments
     if interaction.request.uri.match?(%r{(creditcard|directdebit)/payment/[^/]+})
       interaction.request.uri.gsub!(%r{(creditcard|directdebit)/payment/[^/]+}, '\1/payment/FILTERED')
+    end
+
+    if interaction.request.uri.match?(%r{references/info\?reference=[^&]+})
+      interaction.request.uri.gsub!(%r{references/info\?reference=[^&]+}, "references/info?reference=FILTERED")
     end
   end
 end
