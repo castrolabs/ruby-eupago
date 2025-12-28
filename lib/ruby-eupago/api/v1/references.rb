@@ -24,7 +24,6 @@ module EuPago
           V1.oauth_client.get("/management/v1.02/references", query: params)
         end
 
-
         # Fetches reference information by reference and entity.
         #
         # @param body [Hash] Required parameters for the request.
@@ -46,7 +45,7 @@ module EuPago
         # @alias find_by_reference for find method with reference parameter.
         #
         def self.find_by_reference(reference, body = {})
-          self.find(body.merge({ referencia: reference }))
+          find(body.merge({ referencia: reference }))
         end
       end
     end

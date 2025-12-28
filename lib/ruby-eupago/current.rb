@@ -14,6 +14,7 @@ module EuPago
 
     def self.token_expired?
       return true if @token_expires_at.nil?
+
       Time.now >= @token_expires_at
     end
 

@@ -22,7 +22,7 @@ RSpec.describe(EuPago::Api::V1::References, :vcr) do
   it "find_by_reference returns reference information", tty: true do
     payload = PaymentSpecHelper::Payment.credit_card_attributes
     transaction = EuPago::Api::V1::CreditCard.create(payload)
-    
+
     # Only as for tty mode and when recording a new cassette
     if VCR.current_cassette.recording?
       # https://eupago.readme.io/reference/test-cards
@@ -51,7 +51,7 @@ RSpec.describe(EuPago::Api::V1::References, :vcr) do
     expect(payment["hora_pagamento"]).not_to(be_nil)
     expect(payment["data_previsao_transferencia"]).not_to(be_nil)
   end
-  
+
   it "find_by_reference does not return payment if pending" do
     payload = PaymentSpecHelper::Payment.credit_card_attributes
     transaction = EuPago::Api::V1::CreditCard.create(payload)
@@ -65,7 +65,7 @@ RSpec.describe(EuPago::Api::V1::References, :vcr) do
     expect(response["estado_referencia"]).not_to(be_nil)
     expect(response["sucesso"]).to(be(true))
     expect(response["resposta"]).not_to(be_nil)
-    
+
     # Payment details
     expect(response["pagamentos"]).to(be(nil))
   end
