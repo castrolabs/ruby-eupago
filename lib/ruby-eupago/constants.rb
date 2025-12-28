@@ -19,6 +19,17 @@ module EuPago
       once: "OOFF",
       recurring: "RCUR",
       final: "FNAL",
-    }
+    }.freeze
+
+    REFERENCE_STATUS = {
+      paid: "paga",
+      pending: "pendente",
+      expired: "expirada",
+      error: "erro",
+      canceled: "cancelada",
+      refunded: "reembolsada",
+      returned: "devolvida",
+      archived: "arquivada",
+    }.freeze
   end
 end

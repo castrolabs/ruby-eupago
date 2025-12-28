@@ -5,15 +5,16 @@ module EuPago
     module Client
       def initialize(config = {})
         options = Hash[config.map { |(k, v)| [k.to_sym, v] }]
-        @base_url = options[:base_url] || build_base_url
+        @base_url = build_base_url(options.fetch(:prefix_base_url, ""))
         @include_api_key = options.fetch(:include_api_key, false)
+        @include_api_key_in_body = options.fetch(:include_api_key_in_body, false)
       end
 
       def build_base_url(append_base_url = "")
         if ENV["EUPAGO_PRODUCTION"].to_s.empty?
-          "https://sandbox.eupago.pt/api#{append_base_url}"
+          "https://sandbox.eupago.pt#{append_base_url}"
         else
-          "https://clientes.eupago.pt/api#{append_base_url}"
+          "https://clientes.eupago.pt#{append_base_url}"
         end
       end
 
@@ -31,6 +32,7 @@ module EuPago
 
       def post(api_url, body: {}, headers: {})
         kheader = build_headers(headers)
+        body[:chave] = ENV.fetch("EUPAGO_API_KEY", "") if @include_api_key_in_body && body[:chave].nil?
         kbody = kheader["Content-Type"] == "application/json" ? body.to_json : body
 
         result = HTTParty.post(

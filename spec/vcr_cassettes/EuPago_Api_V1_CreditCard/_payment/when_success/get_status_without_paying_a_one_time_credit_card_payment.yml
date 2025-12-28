@@ -1,0 +1,100 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.eupago.pt/api/v1.02/creditcard/create
+    body:
+      encoding: UTF-8
+      string: '{"payment":{"identifier":"Test One time credit card payment","amount":{"currency":"EUR","value":10},"successUrl":"https://www.test.com/success","failUrl":"https://www.test.com/fail","backUrl":"https://www.test.com/back","lang":"PT","minutesFormUp":1440}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.20.1
+      Date:
+      - Sun, 28 Dec 2025 13:51:42 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/8.0.30
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000;
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - no-referrer
+    body:
+      encoding: UTF-8
+      string: '{"transactionStatus":"Success","transactionID":"FILTERED","reference":"FILTERED","redirectUrl":"FILTERED"}'
+  recorded_at: Sun, 28 Dec 2025 13:51:42 GMT
+- request:
+    method: post
+    uri: https://sandbox.eupago.pt/clientes/rest_api/multibanco/info
+    body:
+      encoding: UTF-8
+      string: '{"referencia":"233938","chave":"<EUPAGO_API_KEY>"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.20.1
+      Date:
+      - Sun, 28 Dec 2025 13:51:42 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/8.0.30
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, must-revalidate
+      Strict-Transport-Security:
+      - max-age=31536000;
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - no-referrer
+    body:
+      encoding: UTF-8
+      string: '{"entidade":null,"referencia":"233938","identificador":"Test One time
+        credit card payment","estado":0,"data_criacao":"2025-12-28","hora_criacao":"13:51:42","estado_referencia":"pendente","arquivada":false,"sucesso":true,"resposta":"OK"}'
+  recorded_at: Sun, 28 Dec 2025 13:51:42 GMT
+recorded_with: VCR 6.3.1

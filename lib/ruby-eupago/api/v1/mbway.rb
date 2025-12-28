@@ -3,8 +3,8 @@ module EuPago
     module V1
       class MBWay
         # https://eupago.readme.io/reference/mbway
-        def self.payment(params)
-          V1.client.post("/v1.02/mbway/create", body: params)
+        def self.payment(body)
+          V1.client.post("/mbway/create", body: body)
         end
       end
     end
