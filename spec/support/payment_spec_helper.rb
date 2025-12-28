@@ -2,7 +2,7 @@ require_relative "utils"
 
 module PaymentSpecHelper
   class Subscription
-    def self.credid_card_attributes(overrides = {})
+    def self.credit_card_attributes(overrides = {})
       base_attributes = {
         "payment" => {
           "identifier" => "Test Subscription",
@@ -82,7 +82,7 @@ module PaymentSpecHelper
 
       Utils.deep_merge(base_attributes, overrides)
     end
-  
+
     def self.credit_card_missing_url_attributes(overrides = {})
       base_attributes = {
         "payment" => {
@@ -138,6 +138,16 @@ module PaymentSpecHelper
       }
 
       Utils.deep_merge(base_attributes, overrides)
+    end
+  end
+
+  EuPago::Constants::REFERENCE_STATUS.each_key do |status_key|
+    define_singleton_method("is_#{status_key}_status?") do |response|
+      transaction = EuPago::Api::V1::References.list({ reference: response["reference"] })
+      return false if transaction["referenceList"].empty?
+
+      row = transaction["referenceList"].first
+      row["status"] == EuPago::Constants::REFERENCE_STATUS[status_key]
     end
   end
 end

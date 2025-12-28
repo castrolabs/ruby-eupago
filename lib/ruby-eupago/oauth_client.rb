@@ -30,12 +30,14 @@ module EuPago
 
     def token_expired?
       return true if @token_expires_at.nil?
+
       Time.now >= @token_expires_at
     end
 
     def fetch_token
       auth_client = EuPago::Client.new
-      result = auth_client.post("/auth/token",
+      result = auth_client.post(
+        "/auth/token",
         body: {
           grant_type: EuPago::Constants::GRANT_TYPES[:client_credentials],
           client_id: ENV["EUPAGO_CLIENT_ID"],
@@ -43,7 +45,7 @@ module EuPago
         },
         headers: {
           "Content-Type" => "application/x-www-form-urlencoded",
-        }
+        },
       )
 
       @access_token = result["access_token"]
