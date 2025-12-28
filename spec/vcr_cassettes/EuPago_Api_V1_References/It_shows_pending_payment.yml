@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - nginx/1.20.1
       Date:
-      - Sun, 28 Dec 2025 11:38:03 GMT
+      - Sun, 28 Dec 2025 13:49:31 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -47,7 +47,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"transactionStatus":"Success","transactionID":"FILTERED","reference":"FILTERED","redirectUrl":"FILTERED"}'
-  recorded_at: Sun, 28 Dec 2025 11:38:03 GMT
+  recorded_at: Sun, 28 Dec 2025 13:49:31 GMT
 - request:
     method: post
     uri: https://sandbox.eupago.pt/api/auth/token
@@ -69,7 +69,7 @@ http_interactions:
       Server:
       - nginx/1.20.1
       Date:
-      - Sun, 28 Dec 2025 11:38:05 GMT
+      - Sun, 28 Dec 2025 13:49:33 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -95,7 +95,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"transactionStatus":"Success","access_token":"FILTERED","token_type":"Bearer","expires_in":432000}'
-  recorded_at: Sun, 28 Dec 2025 11:38:05 GMT
+  recorded_at: Sun, 28 Dec 2025 13:49:33 GMT
 - request:
     method: get
     uri: https://sandbox.eupago.pt/api/management/v1.02/references/info?reference=FILTERED
@@ -117,7 +117,7 @@ http_interactions:
       Server:
       - nginx/1.20.1
       Date:
-      - Sun, 28 Dec 2025 11:38:05 GMT
+      - Sun, 28 Dec 2025 13:49:34 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -142,7 +142,7 @@ http_interactions:
       - no-referrer
     body:
       encoding: UTF-8
-      string: '{"transactionStatus":"Success","referenceList":[{"reference":"FILTERED","entity":"10047","amount":"10.60000","datetime":"2025-12-28T11:38:03Z","status":"pendente","identifier":"Test
+      string: '{"transactionStatus":"Success","referenceList":[{"reference":"FILTERED","entity":"10047","amount":"10.60000","datetime":"2025-12-28T13:49:31Z","status":"pendente","identifier":"Test
         One time credit card payment"}]}'
-  recorded_at: Sun, 28 Dec 2025 11:38:05 GMT
+  recorded_at: Sun, 28 Dec 2025 13:49:34 GMT
 recorded_with: VCR 6.3.1

@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - nginx/1.20.1
       Date:
-      - Sun, 28 Dec 2025 12:23:49 GMT
+      - Sun, 28 Dec 2025 13:35:01 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -47,61 +47,13 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"transactionStatus":"Success","transactionID":"FILTERED","reference":"FILTERED","redirectUrl":"FILTERED"}'
-  recorded_at: Sun, 28 Dec 2025 12:23:49 GMT
+  recorded_at: Sun, 28 Dec 2025 13:35:01 GMT
 - request:
     method: post
-    uri: https://sandbox.eupago.pt/api/auth/token
+    uri: https://sandbox.eupago.pt/clientes/rest_api/multibanco/info
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=<EUPAGO_CLIENT_ID>&client_secret=<EUPAGO_CLIENT_SECRET>
-    headers:
-      Content-Type:
-      - application/x-www-form-urlencoded
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx/1.20.1
-      Date:
-      - Sun, 28 Dec 2025 12:23:50 GMT
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      X-Powered-By:
-      - PHP/8.0.30
-      Expires:
-      - Thu, 19 Nov 1981 08:52:00 GMT
-      Cache-Control:
-      - no-store, no-cache, must-revalidate
-      Pragma:
-      - no-cache
-      Strict-Transport-Security:
-      - max-age=31536000;
-      X-Content-Type-Options:
-      - nosniff
-      X-Xss-Protection:
-      - 1; mode=block
-      Referrer-Policy:
-      - no-referrer
-    body:
-      encoding: UTF-8
-      string: '{"transactionStatus":"Success","access_token":"FILTERED","token_type":"Bearer","expires_in":432000}'
-  recorded_at: Sun, 28 Dec 2025 12:23:50 GMT
-- request:
-    method: get
-    uri: https://sandbox.eupago.pt/api/management/v1.02/references/info?reference=FILTERED
-    body:
-      encoding: US-ASCII
-      string: ''
+      string: '{"referencia":"233929","chave":"<EUPAGO_API_KEY>"}'
     headers:
       Content-Type:
       - application/json
@@ -117,7 +69,7 @@ http_interactions:
       Server:
       - nginx/1.20.1
       Date:
-      - Sun, 28 Dec 2025 12:23:50 GMT
+      - Sun, 28 Dec 2025 13:35:02 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -128,10 +80,10 @@ http_interactions:
       - PHP/8.0.30
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
-      Cache-Control:
-      - no-store, no-cache, must-revalidate
       Pragma:
       - no-cache
+      Cache-Control:
+      - no-cache, must-revalidate
       Strict-Transport-Security:
       - max-age=31536000;
       X-Content-Type-Options:
@@ -142,7 +94,7 @@ http_interactions:
       - no-referrer
     body:
       encoding: UTF-8
-      string: '{"transactionStatus":"Success","referenceList":[{"reference":"FILTERED","entity":"10047","amount":"10.00000","datetime":"2025-12-28T12:23:49Z","status":"pendente","identifier":"Test
-        One time credit card payment"}]}'
-  recorded_at: Sun, 28 Dec 2025 12:23:50 GMT
+      string: '{"entidade":null,"referencia":"233929","identificador":"Test One time
+        credit card payment","estado":0,"data_criacao":"2025-12-28","hora_criacao":"13:35:01","estado_referencia":"pendente","arquivada":false,"sucesso":true,"resposta":"OK"}'
+  recorded_at: Sun, 28 Dec 2025 13:35:02 GMT
 recorded_with: VCR 6.3.1

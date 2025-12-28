@@ -80,7 +80,7 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
         expect(payment_response["message"]).to(eq("Payment has been executed successfully."))
       end
 
-      it "Process a one time credit card payment", tty: true, focus: true do
+      it "Process a one time credit card payment", tty: true do
         response = described_class.create(PaymentSpecHelper::Payment.credit_card_attributes)
 
         expect(response["redirectUrl"]).not_to(be_nil)
@@ -96,7 +96,7 @@ RSpec.describe(EuPago::Api::V1::CreditCard, :vcr) do
         expect(PaymentSpecHelper.is_paid_status?(response)).to(be(true))
       end
 
-      it "get staus without paying a one time credit card payment" do
+      it "get status without paying a one time credit card payment" do
         response = described_class.create(PaymentSpecHelper::Payment.credit_card_attributes)
 
         expect(response["transactionStatus"]).to(eq("Success"))

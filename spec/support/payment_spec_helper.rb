@@ -143,11 +143,8 @@ module PaymentSpecHelper
 
   EuPago::Constants::REFERENCE_STATUS.each_key do |status_key|
     define_singleton_method("is_#{status_key}_status?") do |response|
-      transaction = EuPago::Api::V1::References.list({ reference: response["reference"] })
-      return false if transaction["referenceList"].empty?
-
-      row = transaction["referenceList"].first
-      row["status"] == EuPago::Constants::REFERENCE_STATUS[status_key]
+      transaction = EuPago::Api::V1::References.find_by_reference(response["reference"])
+      transaction["estado_referencia"] == EuPago::Constants::REFERENCE_STATUS[status_key]
     end
   end
 end
