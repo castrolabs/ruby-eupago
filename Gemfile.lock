@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-eupago (0.2.0)
+    ruby-eupago (0.2.1)
       httparty (~> 0.23.1)
 
 GEM
