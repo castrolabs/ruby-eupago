@@ -11,6 +11,11 @@ module EuPago
         def self.payment(reference, body)
           V1.client.post("/directdebit/payment/#{reference}", body: body)
         end
+
+        # https://eupago.readme.io/reference/direct-debit-list
+        def self.list
+          V1.oauth_client.get("/management/v1.02/directdebits")
+        end
       end
     end
   end
