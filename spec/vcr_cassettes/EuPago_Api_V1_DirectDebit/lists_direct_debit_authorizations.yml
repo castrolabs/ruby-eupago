@@ -1,0 +1,147 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.eupago.pt/api/auth/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials&client_id=<EUPAGO_CLIENT_ID>&client_secret=<EUPAGO_CLIENT_SECRET>
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.20.1
+      Date:
+      - Fri, 02 Jan 2026 22:28:29 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/8.0.30
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000;
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - no-referrer
+    body:
+      encoding: UTF-8
+      string: '{"transactionStatus":"Success","access_token":"FILTERED","token_type":"Bearer","expires_in":432000}'
+  recorded_at: Fri, 02 Jan 2026 22:28:29 GMT
+- request:
+    method: get
+    uri: https://sandbox.eupago.pt/api/management/v1.02/directdebits
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.20.1
+      Date:
+      - Fri, 02 Jan 2026 22:28:29 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/8.0.30
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000;
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - no-referrer
+    body:
+      encoding: UTF-8
+      string: '{"transactionStatus":"Success","directDebitAuthorizationsList":[{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","collectionDay":"14","date":"2025-09-14","limitDate":"2026-09-14"},"creationDate":"2025-09-14
+        20:49:42"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","collectionDay":"14","date":"2025-09-14","limitDate":"2026-09-14"},"creationDate":"2025-09-14
+        20:54:09"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","collectionDay":"14","date":"2025-09-14","limitDate":"2026-09-14"},"creationDate":"2025-09-14
+        20:54:59"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","collectionDay":"14","date":"2025-09-14","limitDate":"2026-09-14"},"creationDate":"2025-09-14
+        20:57:20"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","collectionDay":"14","date":"2025-09-14","limitDate":"2026-09-14"},"creationDate":"2025-09-14
+        20:59:03"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","collectionDay":"14","date":"2025-09-14","limitDate":"2026-09-14"},"creationDate":"2025-09-14
+        21:00:44"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","date":"2025-09-14","limitDate":"2026-09-14"},"creationDate":"2025-09-14
+        21:05:32"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","date":"2025-09-14","limitDate":"2026-09-14"},"creationDate":"2025-09-14
+        21:06:15"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","date":"2025-09-14","limitDate":"2026-09-14"},"creationDate":"2025-09-14
+        21:10:38"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","date":"2025-09-14","limitDate":"2026-09-14"},"creationDate":"2025-09-14
+        21:12:21"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"PTPC-0001_1_2026","debtor":{"name":"Pres.
+        Wanetta Mertz","email":"user_1_sanora@sink.sendgrid.net","address":{"street":"9033
+        Windler Prairie","zipCode":"9043-965","locality":"Revaberg","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"10.00","type":"RCUR","periodicity":"Mensal","autoProcess":"1","collectionDay":"5","date":"2026-01-07","limitDate":"2031-01-02"},"creationDate":"2026-01-02
+        21:48:55"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"PTPC-0001_1_2026","debtor":{"name":"Lucas
+        Altenwerth","email":"user_1_scott@sink.sendgrid.net","address":{"street":"864
+        Aldo Motorway","zipCode":"5084-502","locality":"New Carletta","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"10.00","type":"RCUR","periodicity":"Mensal","autoProcess":"1","collectionDay":"7","date":"2026-01-07","limitDate":"2031-01-02"},"creationDate":"2026-01-02
+        21:49:43"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","date":"2026-01-02","limitDate":"2027-01-02"},"creationDate":"2026-01-02
+        22:18:11"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","date":"2026-01-02","limitDate":"2027-01-02"},"creationDate":"2026-01-02
+        22:18:12"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","date":"2026-01-02","limitDate":"2027-01-02"},"creationDate":"2026-01-02
+        22:27:13"},{"authorizationId":"FILTERED","reference":"FILTERED","identifier":"Test
+        Direct Debit Subscription","debtor":{"name":"NomeDoDevedor","email":"alexoliveira7x+eupagotester@gmail.com","address":{"street":"Rua
+        das coisas","zipCode":"1234-5678","locality":"Lisboa","country":"PT"},"iban":"FILTERED","bic":"FILTERED"},"status":"Pendente","payment":{"amount":"20.00","type":"RCUR","periodicity":"Mensal","date":"2026-01-02","limitDate":"2027-01-02"},"creationDate":"2026-01-02
+        22:27:14"}]}'
+  recorded_at: Fri, 02 Jan 2026 22:28:31 GMT
+recorded_with: VCR 6.3.1

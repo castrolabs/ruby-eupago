@@ -6,7 +6,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"debtor":{"address":{"zipCode":"1234-5678","country":"PT","street":"Rua
-        das coisas","locality":"Lisboa"},"iban":"PT50123443211234567890172","name":"NomeDoDevedor","bic":"CGDIPTPL","email":"alexoliveira7x+eupagotester@gmail.com"},"payment":{"autoProcess":"0","type":"RCUR","date":"2025-09-14","amount":20,"collectionDay":14,"periodicity":"Mensal","limitDate":"2026-09-14"},"adminCallback":null,"identifier":"Test
+        das coisas","locality":"Lisboa"},"iban":"PT50123443211234567890172","name":"NomeDoDevedor","bic":"CGDIPTPL","email":"alexoliveira7x+eupagotester@gmail.com"},"payment":{"autoProcess":"0","type":"RCUR","date":"2026-01-02","amount":20,"collectionDay":null,"periodicity":"Mensal","limitDate":"2027-01-02"},"adminCallback":null,"identifier":"Test
         Direct Debit Subscription"}'
     headers:
       Content-Type:
@@ -23,7 +23,7 @@ http_interactions:
       Server:
       - nginx/1.20.1
       Date:
-      - Sun, 14 Sep 2025 19:49:43 GMT
+      - Fri, 02 Jan 2026 22:27:13 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -49,5 +49,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"transactionStatus":"Success","reference":"FILTERED"}'
-  recorded_at: Sun, 14 Sep 2025 19:49:43 GMT
+  recorded_at: Fri, 02 Jan 2026 22:27:13 GMT
 recorded_with: VCR 6.3.1
