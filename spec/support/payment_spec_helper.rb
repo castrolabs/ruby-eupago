@@ -61,6 +61,27 @@ module PaymentSpecHelper
         "identifier" => "Test Direct Debit Subscription",
       }
     end
+
+    def self.direct_debit_payment_attributes(overrides = {})
+      {
+        date: direct_debit_collection_date,
+        amount: 20,
+        obs: "Test Direct Debit Payment - payment after authorization",
+        type: EuPago::Constants::PAYMENT_TYPES[:recurring],
+      }
+    end
+
+    def self.direct_debit_collection_date
+      # 5 business days from today
+      date = Date.today
+      days_added = 0
+      while days_added < 5
+        date += 1
+        days_added += 1 unless date.saturday? || date.sunday?
+      end
+
+      date.strftime("%Y-%m-%d")
+    end
   end
 
   class Payment

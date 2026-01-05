@@ -51,4 +51,17 @@ RSpec.describe(EuPago::Api::V1::DirectDebit, :vcr) do
       described_class.payment(response["reference"], PaymentSpecHelper::Payment.direct_debit_attributes)
     end.to(raise_error(EuPago::BadRequestError))
   end
+
+  it "processes a direct debit payment with instance method", tty: true do
+    authorization = described_class.authorization(PaymentSpecHelper::Subscription.direct_debit_attributes)
+
+    # Only as for tty mode and when recording a new cassette
+    if VCR.current_cassette.recording?
+      input("Approve in backoffice: Operações > Consultar > Débitos Diretos")
+    end
+
+    response = described_class.payment(authorization["reference"], PaymentSpecHelper::Subscription.direct_debit_payment_attributes)
+    expect(response["transactionStatus"]).to(eq("Success"))
+    expect(response["collectionDate"]).to(eq(PaymentSpecHelper::Subscription.direct_debit_collection_date))
+  end
 end
