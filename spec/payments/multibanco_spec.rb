@@ -5,7 +5,7 @@ RSpec.describe(EuPago::Api::V1::Multibanco, :vcr) do
     context "when success" do
       it "creates a subscription" do
         response = described_class.create(PaymentSpecHelper::Payment.multibanco_attributes)
-        
+
         expect(response["sucesso"]).to(eq(true))
         expect(response["referencia"]).not_to(be_nil)
         expect(response["entidade"]).not_to(be_nil)

@@ -162,7 +162,7 @@ module PaymentSpecHelper
     end
 
     def self.multibanco_attributes(overrides = {})
-      base_attributes = {
+      {
         "identifier" => "Test Multibanco Payment",
         "data_inicio" => Date.today.strftime("%Y-%m-%d"),
         "data_fim" => (Date.today + 7).strftime("%Y-%m-%d"),
