@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - nginx/1.20.1
       Date:
-      - Mon, 05 Jan 2026 18:19:12 GMT
+      - Mon, 05 Jan 2026 19:45:27 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -47,5 +47,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"sucesso":true,"estado":0,"resposta":"OK","referencia":"FILTERED","valor":"10.00000","entidade":"81921","valor_minimo":"10","valor_maximo":"10","data_inicio":"2026-01-05","data_fim":"2026-01-12"}'
-  recorded_at: Mon, 05 Jan 2026 18:19:12 GMT
+  recorded_at: Mon, 05 Jan 2026 19:45:27 GMT
 recorded_with: VCR 6.3.1
