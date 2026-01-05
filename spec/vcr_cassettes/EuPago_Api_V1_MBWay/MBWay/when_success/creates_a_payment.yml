@@ -5,7 +5,8 @@ http_interactions:
     uri: https://sandbox.eupago.pt/api/v1.02/mbway/create
     body:
       encoding: UTF-8
-      string: '{"payment":{"identifier":"Test MBWay Payment","amount":{"currency":"EUR","value":10},"customerPhone":"912345678","countryCode":"+351"}}'
+      string: '{"payment":{"identifier":"Test MBWay Payment","amount":{"currency":"EUR","value":10},"customerPhone":"912345678","countryCode":"+351","customer":{"notify":true,"name":"Test
+        User","email":"alexoliveira7x+eupagotester@gmail.com","failOver":"0","phone":"912345678"}}}'
     headers:
       Content-Type:
       - application/json
@@ -21,7 +22,7 @@ http_interactions:
       Server:
       - nginx/1.20.1
       Date:
-      - Sun, 14 Sep 2025 18:55:31 GMT
+      - Mon, 05 Jan 2026 20:29:21 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -47,5 +48,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"transactionStatus":"Success","transactionID":"FILTERED","reference":"FILTERED"}'
-  recorded_at: Sun, 14 Sep 2025 18:55:31 GMT
+  recorded_at: Mon, 05 Jan 2026 20:29:21 GMT
 recorded_with: VCR 6.3.1

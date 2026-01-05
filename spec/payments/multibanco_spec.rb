@@ -24,7 +24,7 @@ RSpec.describe(EuPago::Api::V1::Multibanco, :vcr) do
 
         # Only as for tty mode and when recording a new cassette
         if VCR.current_cassette.recording?
-          input("Make the payment using the generated reference #{response["referencia"]} and entidade #{response["entidade"]}")
+          input("Mark the payment as paid for: reference #{response["referencia"]} and entidade #{response["entidade"]}")
         end
 
         verification = EuPago::Api::V1::References.find_by_reference(response["referencia"])

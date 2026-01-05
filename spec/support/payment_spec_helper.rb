@@ -150,6 +150,35 @@ module PaymentSpecHelper
       Utils.deep_merge(base_attributes, overrides)
     end
 
+    def self.pix_attributes(overrides = {})
+      base_attributes = {
+        "payment" => {
+          "identifier" => "Test Pix Payment",
+          "amount" => {
+            "currency" => "EUR",
+            "value" => 10,
+          },
+          "customerPhone" => "21999999999", # Fake number for tests
+          "countryCode" => "+55",
+          "customer" => {
+            "notify" => true,
+            "name" => "Test User",
+            "email" => Utils.customer_email,
+            # Field: failOver
+            # A parameter that defines if the final client will recieve an sms/email
+            # reminder notification in case of fail payment ("0" or "1" string value)
+            "failOver" => "0",
+            # Field: phone
+            # required if failOver = "1"
+            # 9 digits string
+            "phone" => "912345678",
+          },
+        },
+      }
+
+      Utils.deep_merge(base_attributes, overrides)
+    end
+
     def self.direct_debit_attributes(overrides = {})
       base_attributes = {
         "type" => "RCUR",
