@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.eupago.pt/clientes/rest_api/multibanco/create
+    body:
+      encoding: UTF-8
+      string: '{"identifier":"Test Multibanco Payment","data_inicio":"2026-01-05","data_fim":"2026-01-12","valor":10,"valor_minimo":null,"valor_maximo":null,"per_dup":0,"campos_extra":[],"failOver":"0","email":"alexoliveira7x+eupagotester@gmail.com","contacto":null,"userID":null,"chave":"<EUPAGO_API_KEY>"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.20.1
+      Date:
+      - Mon, 05 Jan 2026 18:19:12 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/8.0.30
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, must-revalidate
+      Strict-Transport-Security:
+      - max-age=31536000;
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - no-referrer
+    body:
+      encoding: UTF-8
+      string: '{"sucesso":true,"estado":0,"resposta":"OK","referencia":"FILTERED","valor":"10.00000","entidade":"81921","valor_minimo":"10","valor_maximo":"10","data_inicio":"2026-01-05","data_fim":"2026-01-12"}'
+  recorded_at: Mon, 05 Jan 2026 18:19:12 GMT
+recorded_with: VCR 6.3.1

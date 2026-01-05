@@ -160,6 +160,26 @@ module PaymentSpecHelper
 
       Utils.deep_merge(base_attributes, overrides)
     end
+
+    def self.multibanco_attributes(overrides = {})
+      base_attributes = {
+        "identifier" => "Test Multibanco Payment",
+        "data_inicio" => Date.today.strftime("%Y-%m-%d"),
+        "data_fim" => (Date.today + 7).strftime("%Y-%m-%d"),
+        "valor" => 10,
+        # valor_maximo and valor_minimo => Maximum amount (only for references that allow payments in an interval of amounts)
+        "valor_minimo" => nil,
+        "valor_maximo" => nil,
+        # per_dup => Defines if the reference allows 1 payment or more that 1 payment (1 = allows multiple payments | 0 = allows only 1 payment)
+        "per_dup" => 0,
+        "campos_extra" => [],
+        "failOver" => "0",
+        "email" => Utils.customer_email,
+        # contacto => User phone number to receive the reminder notification (Only if failover = 1).
+        "contacto" => nil,
+        "userID" => nil,
+      }
+    end
   end
 
   EuPago::Constants::REFERENCE_STATUS.each_key do |status_key|
