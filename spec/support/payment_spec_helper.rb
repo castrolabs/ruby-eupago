@@ -57,7 +57,7 @@ module PaymentSpecHelper
           "periodicity" => EuPago::Constants::RECURRENT_PAYMENT_INTERVALS[:monthly],
           "limitDate" => (Date.today >> 12).strftime("%Y-%m-%d"),
         },
-        "adminCallback" => nil,
+        "adminCallback" => "https://testlekito.free.beeceptor.com?source=RubyEupagoTests",
         "identifier" => "Test Direct Debit Subscription",
       }
     end
