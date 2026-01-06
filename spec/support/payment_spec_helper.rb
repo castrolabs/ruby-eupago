@@ -57,7 +57,7 @@ module PaymentSpecHelper
           "periodicity" => EuPago::Constants::RECURRENT_PAYMENT_INTERVALS[:monthly],
           "limitDate" => (Date.today >> 12).strftime("%Y-%m-%d"),
         },
-        "adminCallback" => nil,
+        "adminCallback" => "https://testlekito.free.beeceptor.com?source=RubyEupagoTests",
         "identifier" => "Test Direct Debit Subscription",
       }
     end
@@ -150,6 +150,35 @@ module PaymentSpecHelper
       Utils.deep_merge(base_attributes, overrides)
     end
 
+    def self.pix_attributes(overrides = {})
+      base_attributes = {
+        "payment" => {
+          "identifier" => "Test Pix Payment",
+          "amount" => {
+            "currency" => "EUR",
+            "value" => 10,
+          },
+          "customerPhone" => "21999999999", # Fake number for tests
+          "countryCode" => "+55",
+          "customer" => {
+            "notify" => true,
+            "name" => "Test User",
+            "email" => Utils.customer_email,
+            # Field: failOver
+            # A parameter that defines if the final client will recieve an sms/email
+            # reminder notification in case of fail payment ("0" or "1" string value)
+            "failOver" => "0",
+            # Field: phone
+            # required if failOver = "1"
+            # 9 digits string
+            "phone" => "912345678",
+          },
+        },
+      }
+
+      Utils.deep_merge(base_attributes, overrides)
+    end
+
     def self.direct_debit_attributes(overrides = {})
       base_attributes = {
         "type" => "RCUR",
@@ -159,6 +188,26 @@ module PaymentSpecHelper
       }
 
       Utils.deep_merge(base_attributes, overrides)
+    end
+
+    def self.multibanco_attributes(overrides = {})
+      {
+        "identifier" => "Test Multibanco Payment",
+        "data_inicio" => Date.today.strftime("%Y-%m-%d"),
+        "data_fim" => (Date.today + 7).strftime("%Y-%m-%d"),
+        "valor" => 10,
+        # valor_maximo and valor_minimo => Maximum amount (only for references that allow payments in an interval of amounts)
+        "valor_minimo" => nil,
+        "valor_maximo" => nil,
+        # per_dup => Defines if the reference allows 1 payment or more that 1 payment (1 = allows multiple payments | 0 = allows only 1 payment)
+        "per_dup" => 0,
+        "campos_extra" => [],
+        "failOver" => "0",
+        "email" => Utils.customer_email,
+        # contacto => User phone number to receive the reminder notification (Only if failover = 1).
+        "contacto" => nil,
+        "userID" => nil,
+      }
     end
   end
 

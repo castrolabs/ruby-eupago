@@ -45,6 +45,7 @@ VCR.configure do |config|
       "iban",
       "bic",
       "authorizationId",
+      "referencia",
     ]
 
     response_body = begin
